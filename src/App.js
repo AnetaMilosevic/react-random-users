@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { Content, Footer, Header } from "./components";
 
-function App() {
+import CssBaseline from "@mui/material/CssBaseline";
+import { red } from "@mui/material/colors";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { useState } from "react";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: red[500],
+    },
+  },
+});
+
+const App = () => {
+  const [isGrid, setIsGrid] = useState(false);
+
+  const changeView = () => {
+    setIsGrid(!isGrid);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Header changeView={changeView} />
+      <CssBaseline />
+      <Content isGrid={isGrid} />
+      <Footer />
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
